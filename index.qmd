@@ -1,0 +1,63 @@
+---
+title: "Assignment 4 - Tables"
+author: "Emily Starer"
+format: html
+editor: visual
+---
+
+## Summary
+
+The data is advertising media data. The data is from actual advertising campaigns. The data is represented in a table to have as a benchmarking documents for future media activation . The table represents different clients and their main types of campaigns. The columns in the table represent different KPIs used to measure media: CTR, Sales Conversions and Revenue. I formatted with a separate table for each tactic and then the rows represent each client so that it is easy to compare tactics across clients.
+
+## Input Data Source
+
+```{r}
+#| echo: false
+library(knitr)
+library(DT)
+library(tidyverse)
+library(dbplyr)
+```
+
+```{r}
+#read in data
+library(readr)
+media <- read.csv("mediadata.csv") 
+head(media)
+```
+
+## Build Table
+
+```{r}
+#Consideration Table 
+
+#grouping by Consideration Tactic
+media_consid <- media %>% filter(media$Tactic == "Consideration")
+
+#aggregate by Client 
+media_consid <- media_consid %>% group_by(Client, Tactic) %>%
+                                  summarize (Impressions = sum(Imps),
+                                             Click = sum(Clicks),
+                                             CTR = ((Click / Impressions)*100),
+                                             Sales_Conversions = sum(Conversions),
+                                             CVR =  ((Sales_Conversions / Impressions)*100))
+media_consid
+                                                                                        
+```
+
+```{r}
+tbl_mediac_consid <- media_consid %>%
+                    select (Client, Impressions, Click, CTR, Sales_Conversions, CVR) %>%
+                    datatable (colnames= c("Client",
+                                      "Impressions",
+                                       "Clicks",
+                                       "CTR",
+                                       "Sales",
+                                       "CVR"))%>%
+                    formatRound(columns = c(2,3,5),
+                                          digits = 0)%>%
+                    formatPercentage(columns = c(4,6),
+                                     digits = 1)
+
+tbl_mediac_consid
+```
