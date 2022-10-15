@@ -7,7 +7,7 @@ editor: visual
 
 ## Summary
 
-The data is advertising media data. The data is from actual advertising campaigns. The data is represented in a table to have as a benchmarking documents for future media activation . The table represents different clients and their main types of campaigns. The columns in the table represent different KPIs used to measure media: CTR, Sales Conversions and Revenue. I formatted with a separate table for each tactic and then the rows represent each client so that it is easy to compare tactics across clients.
+The data is advertising media data. The data is from actual advertising campaigns. The data is represented in a table to have as a benchmarking documents for future media activation . The table represents different clients across Consideration campaigns. The columns in the table represent different KPIs used to measure media: Impressions, Clicks, CTR, Sales and CVR. I formatted the table to look at one specific tactic and then the rows represent each client so that it is easy to compare tactics across clients.
 
 ## Input Data Source
 
